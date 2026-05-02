@@ -1,15 +1,15 @@
 defmodule CondorDelSur.ServidorVuelo do
   alias CondorDelSur.{Asiento, Reserva}
 
-  # Inicia el proceso del servidor y lo registra con nombre global Process.register devuelve :ok, por eso retornamos pid explicitamente
-  def iniciar(vuelo, asientos) do
-    pid = spawn(fn -> init(vuelo, asientos) end)
+  # Inicia el proceso del servidor y lo registra con nombre global Process.register devuelve :ok, por eso retornamos pid explicitamente timeout_expiracion es configurable para facilitar los tests
+  def iniciar(vuelo, asientos, timeout_expiracion \\ 30_000) do
+    pid = spawn(fn -> init(vuelo, asientos, timeout_expiracion) end)
     Process.register(pid, :servidor_vuelo)
     pid
   end
 
   # Arma el estado inicial y arranca el bucle
-  defp init(vuelo, asientos) do
+  defp init(vuelo, asientos, timeout_expiracion) do
     estado = %{
       vuelo: vuelo,
       # Convierte la lista en un mapa id => asiento para acceso rapido
@@ -17,13 +17,15 @@ defmodule CondorDelSur.ServidorVuelo do
       reservas: %{},
       proximo_id: 1,
       # Guarda que proceso espera el resultado del pago: id_reserva => pid
-      pagos_pendientes: %{}
+      pagos_pendientes: %{},
+      timeout_expiracion: timeout_expiracion
     }
 
     bucle(estado)
   end
 
-  # Bucle principal, atiende 1 mensaje a la vez, esto garantiza que no haya condicion de carrera sobre el estado, el servidor los atiende en orden - solo uno gana
+  # Bucle principal, atiende 1 mensaje a la vez
+  # esto garantiza que no haya condicion de carrera sobre el estado
   defp bucle(estado) do
     receive do
       {:reservar, id_asiento, id_pasajero, desde} ->
@@ -31,7 +33,6 @@ defmodule CondorDelSur.ServidorVuelo do
         send(desde, respuesta)
         bucle(nuevo_estado)
 
-      # Espera el resultado del pago
       {:confirmar, id_reserva, desde} ->
         nuevo_estado = manejar_confirmacion(estado, id_reserva, desde)
         bucle(nuevo_estado)
@@ -46,7 +47,7 @@ defmodule CondorDelSur.ServidorVuelo do
         send(desde, respuesta)
         bucle(nuevo_estado)
 
-      # La tarea de expiracion manda esto despues de 30 segundos
+      # La tarea de expiracion manda esto despues del timeout configurado
       {:expirar, id_reserva} ->
         nuevo_estado = manejar_expiracion(estado, id_reserva)
         bucle(nuevo_estado)
@@ -83,7 +84,7 @@ defmodule CondorDelSur.ServidorVuelo do
             proximo_id: estado.proximo_id + 1
         }
 
-        lanzar_expiracion(id_reserva)
+        lanzar_expiracion(id_reserva, estado.timeout_expiracion)
 
         send(
           :registrador_auditoria,
@@ -95,7 +96,8 @@ defmodule CondorDelSur.ServidorVuelo do
     end
   end
 
-  # Valida que la reserva exista y este pending, luego lanza el pago guarda el pid del pasajero y responde cuando llegue el resultado del pago
+  # Valida que la reserva exista y este pending, luego lanza el pago
+  # guarda el pid del pasajero y responde cuando llegue el resultado
   defp manejar_confirmacion(estado, id_reserva, desde) do
     reserva = Map.get(estado.reservas, id_reserva)
 
@@ -109,7 +111,6 @@ defmodule CondorDelSur.ServidorVuelo do
         estado
 
       true ->
-        # Guarda quien espera para responderle cuando llegue el resultado del pago
         nuevo_estado = %{
           estado
           | pagos_pendientes: Map.put(estado.pagos_pendientes, id_reserva, desde)
@@ -211,10 +212,10 @@ defmodule CondorDelSur.ServidorVuelo do
 
   # ---- Tareas puntuales (procesos que nacen, hacen algo y mueren) ----
 
-  # Espera 30 segundos y avisa al servidor que la reserva vencio
-  defp lanzar_expiracion(id_reserva) do
+  # Espera el timeout configurado y avisa al servidor que la reserva vencio
+  defp lanzar_expiracion(id_reserva, timeout) do
     spawn(fn ->
-      Process.sleep(30_000)
+      Process.sleep(timeout)
       send(:servidor_vuelo, {:expirar, id_reserva})
     end)
   end
@@ -222,6 +223,7 @@ defmodule CondorDelSur.ServidorVuelo do
   # Simula latencia de pago y notifica el resultado al servidor
   defp lanzar_pago(id_reserva) do
     spawn(fn ->
+      IO.puts("[PAGO] procesando pago para #{id_reserva}...")
       Process.sleep(500)
       send(:servidor_vuelo, {:resultado_pago, id_reserva, :ok})
     end)
