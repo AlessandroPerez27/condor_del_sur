@@ -1,59 +1,60 @@
-[1777682663] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682664] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682664] CONFIRMACION reserva=R1
-[1777682664] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682664] EXPIRACION reserva=R1 asiento=1A
-[1777682666] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682666] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682666] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682667] CONFIRMACION reserva=R1
-[1777682668] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682669] EXPIRACION reserva=R1 asiento=1A
-[1777682670] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682670] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682671] CONFIRMACION reserva=R1
-[1777682671] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682671] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682671] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682671] EXPIRACION reserva=R1 asiento=1A
-[1777682825] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682825] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682825] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682826] CONFIRMACION reserva=R1
-[1777682826] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682826] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682827] CONFIRMACION reserva=R1
-[1777682828] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682828] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682828] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682828] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682829] CONFIRMACION reserva=R1
-[1777682829] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682829] CONFIRMACION reserva=R1
-[1777682975] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682976] CONFIRMACION reserva=R1
-[1777682976] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682977] EXPIRACION reserva=R1 asiento=1A
-[1777682978] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682978] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682978] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682978] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682979] CONFIRMACION reserva=R1
-[1777682989] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682989] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682989] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682989] CONFIRMACION reserva=R1
-[1777682989] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682990] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682991] EXPIRACION reserva=R1 asiento=1A
-[1777682991] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682992] CONFIRMACION reserva=R1
-[1777682993] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682993] CONFIRMACION reserva=R1
-[1777682993] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682994] CONFIRMACION reserva=R1
-[1777682994] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682995] EXPIRACION reserva=R1 asiento=1A
-[1777682996] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682996] RESERVA asiento=1A pasajero=P1 reserva=R1
-[1777682996] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683212] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683213] CONFIRMACION reserva=R1
+[1777683213] RESERVA asiento=1B pasajero=P1 reserva=R2
+[1777683214] CANCELACION reserva=R2 asiento=1B
+[1777683214] RESERVA asiento=2A pasajero=P2 reserva=R3
+[1777683244] EXPIRACION reserva=R3 asiento=2A
+[1777683606] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683606] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683606] CONFIRMACION reserva=R1
+[1777683606] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683607] EXPIRACION reserva=R1 asiento=1A
+[1777683608] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683609] CONFIRMACION reserva=R1
+[1777683609] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683609] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683610] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683610] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683610] CONFIRMACION reserva=R1
+[1777683611] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683611] CONFIRMACION reserva=R1
+[1777683611] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683612] EXPIRACION reserva=R1 asiento=1A
+[1777683613] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683613] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683616] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683616] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683616] CONFIRMACION reserva=R1
+[1777683616] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683617] CONFIRMACION reserva=R1
+[1777683617] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683617] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777683618] EXPIRACION reserva=R1 asiento=1A
+[1777683619] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730113] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730114] EXPIRACION reserva=R1 asiento=1A
+[1777730114] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730115] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730115] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730115] CONFIRMACION reserva=R1
+[1777730115] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730115] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730116] CONFIRMACION reserva=R1
+[1777730117] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730118] EXPIRACION reserva=R1 asiento=1A
+[1777730118] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730119] CONFIRMACION reserva=R1
+[1777730119] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730119] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730120] CONFIRMACION reserva=R1
+[1777730120] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730120] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730122] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730123] EXPIRACION reserva=R1 asiento=1A
+[1777730124] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730124] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730124] CONFIRMACION reserva=R1
+[1777730124] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730125] CONFIRMACION reserva=R1
+[1777730125] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777730125] RESERVA asiento=1A pasajero=P1 reserva=R1

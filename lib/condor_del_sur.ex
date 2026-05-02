@@ -130,7 +130,7 @@ defmodule CondorDelSur do
     end
   end
 
-  # Recolecta N respuestas de procesos hijos y devuelve el primer id_reserva exitoso usa recursion con acumulador: cuando n llega a 0, retorna el ganador
+  # Toma N respuestas de procesos hijos y devuelve el primer id_reserva exitoso usa recursion con acumulador, cuando n llega a 0, retorna el ganador
   defp recolectar_resultados(0, ganador), do: ganador
 
   defp recolectar_resultados(n, ganador) do
