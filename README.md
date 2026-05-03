@@ -16,6 +16,26 @@ cd condor_del_sur
 mix deps.get
 ```
 
+## Estructura del proyecto
+
+```
+condor_del_sur/
+├── lib/
+│   ├── condor_del_sur/
+│   │   ├── asiento.ex           # struct Asiento y transiciones de estado
+│   │   ├── pasajero.ex          # struct Pasajero
+│   │   ├── reserva.ex           # struct Reserva y transiciones de estado
+│   │   ├── vuelo.ex             # struct Vuelo
+│   │   ├── servidor_vuelo.ex    # proceso principal, dueño del estado
+│   │   └── registrador_auditoria.ex  # proceso auxiliar, log y monitor
+│   └── condor_del_sur.ex        # punto de entrada, demo con correr/0
+└── test/
+    ├── condor_del_sur/
+    │   ├── asiento_test.exs     # tests unitarios del struct Asiento
+    │   └── reserva_test.exs     # tests unitarios del struct Reserva
+    └── condor_del_sur_test.exs  # tests de integración con el servidor
+```
+
 ## Correr la demo
 
 La demo levanta todos los procesos y ejecuta 4 escenarios: competencia
@@ -119,7 +139,35 @@ archivo de log limpiamente.
 
 **Asiento**: `:available` → `:reserved` → `:confirmed` | `:available`
 
-## Restricciones de diseño
+## Decisiones de diseño
+
+**ServidorVuelo como único dueño del estado**
+Todo el estado vive en un solo proceso. Esto garantiza que no haya
+condiciones de carrera: si dos pasajeros mandan `{:reservar, "1A"}` al
+mismo tiempo, el servidor los atiende en orden y solo uno gana. No hacen
+falta locks ni mutexes porque no hay memoria compartida.
+
+**Confirmación asincrónica con pagos_pendientes**
+`manejar_confirmacion` no responde inmediatamente al pasajero: guarda su
+pid en `pagos_pendientes` y responde recién cuando llega `{:resultado_pago}`.
+Esto permite que la tarea de pago corra en paralelo sin bloquear el servidor.
+
+**Tarea de expiración verifica estado antes de expirar**
+La tarea spawneada puede llegar tarde si el pasajero ya confirmó o canceló
+mientras tanto. Por eso `manejar_expiracion` verifica que la reserva siga
+`:pending` antes de aplicar el cambio, evitando transiciones inválidas.
+
+**timeout_expiracion configurable**
+El timeout se pasa como parámetro a `iniciar/3` con valor por defecto
+`30_000ms`. Esto permite que los tests usen `1_000ms` sin esperar 30
+segundos reales, sin tocar nada de la lógica de negocio.
+
+**RegistradorAuditoria con monitor sobre ServidorVuelo**
+Se usa `^ref_monitor` para matchear exactamente el monitor configurado y
+no mensajes de otros procesos. Si el servidor cae, el auditor cierra el
+archivo de log limpiamente antes de terminar.
+
+## Restricciones del TP
 
 No se usa ningún módulo de OTP. Solo:
 

@@ -58,3 +58,9 @@
 [1777730125] CONFIRMACION reserva=R1
 [1777730125] RESERVA asiento=1A pasajero=P1 reserva=R1
 [1777730125] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777848034] RESERVA asiento=1A pasajero=P1 reserva=R1
+[1777848035] CONFIRMACION reserva=R1
+[1777848035] RESERVA asiento=1B pasajero=P1 reserva=R2
+[1777848035] CANCELACION reserva=R2 asiento=1B
+[1777848035] RESERVA asiento=2A pasajero=P2 reserva=R3
+[1777848065] EXPIRACION reserva=R3 asiento=2A
